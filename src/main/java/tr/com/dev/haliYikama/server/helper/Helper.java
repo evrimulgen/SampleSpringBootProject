@@ -2,14 +2,13 @@ package tr.com.dev.haliYikama.server.helper;
 
 import com.google.common.io.ByteSource;
 import com.google.common.io.Resources;
+import com.namics.commons.random.RandomData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -29,6 +28,10 @@ public class Helper {
                     props.put(x.getKey(), x.getValue());
                 });
         return props;
+    }
+
+    public <T extends Object> T createDummyData(Class<T> clazz) {
+        return RandomData.random(clazz);
     }
 
     public Properties loadProperties(String filename) {

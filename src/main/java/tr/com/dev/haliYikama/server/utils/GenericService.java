@@ -5,7 +5,6 @@ import tr.com.dev.haliYikama.server.utils.interfaces.IGenericDao;
 import tr.com.dev.haliYikama.server.utils.interfaces.IGenericService;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +33,8 @@ public abstract class GenericService<T extends BaseEntity, K extends Serializabl
     public T get(K id) throws Exception {
         Optional<T> data= genericDao.findById(id);
         if (data.isPresent()){
-            return data.get();
+            T myData = data.get();
+            return myData.getEntityState() == EnumUtil.EntityState.ACTIVE ? myData : null;
         } else {
             throw new Exception("kayitBulunamadi");
         }

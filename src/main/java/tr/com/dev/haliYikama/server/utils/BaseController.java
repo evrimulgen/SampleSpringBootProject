@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import tr.com.dev.haliYikama.server.utils.exeptions.DefaultExceptionAttributes;
-import tr.com.dev.haliYikama.server.utils.interfaces.IBaseController;
 import tr.com.dev.haliYikama.server.utils.exeptions.IExceptionAttributes;
+import tr.com.dev.haliYikama.server.utils.interfaces.IBaseController;
 import tr.com.dev.haliYikama.server.utils.interfaces.IGenericService;
 
 import javax.persistence.NoResultException;
@@ -30,6 +31,7 @@ public abstract class BaseController<T extends BaseEntity>
 
     @Autowired
     private IGenericService<T, Long> service;
+
 
     /**
      * Handles JPA NoResultExceptions thrown from web service controller
@@ -85,6 +87,7 @@ public abstract class BaseController<T extends BaseEntity>
 
 
     @Override
+    @GetMapping("/getAll")
     public ResponseEntity<List<T>> getAll() {
         List<T> lstData = service.getAll();
         return new ResponseEntity<List<T>>(lstData, HttpStatus.OK);
