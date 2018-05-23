@@ -3,6 +3,7 @@ package tr.com.dev.haliYikama.server.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -27,6 +28,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "tr.com.dev.haliYikama.server.persist",
         entityManagerFactoryRef = "protEntityManager",
         transactionManagerRef = "protTransactionManager")
+@ImportResource("classpath:application.properties")
 public class HibernateConfiguration {
     @Autowired
     private Environment environment;
