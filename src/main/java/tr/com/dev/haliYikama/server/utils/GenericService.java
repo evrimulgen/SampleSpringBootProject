@@ -30,14 +30,13 @@ public abstract class GenericService<T extends BaseEntity, K extends Serializabl
     }
 
     @Override
-    public T get(K id) throws Exception {
+    public T get(K id) {
         Optional<T> data= genericDao.findById(id);
         if (data.isPresent()){
             T myData = data.get();
             return myData.getEntityState() == EnumUtil.EntityState.ACTIVE ? myData : null;
-        } else {
-            throw new Exception("kayitBulunamadi");
         }
+        return null;
     }
 
     @Override

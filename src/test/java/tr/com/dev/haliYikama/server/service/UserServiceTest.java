@@ -2,11 +2,17 @@ package tr.com.dev.haliYikama.server.service;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import tr.com.dev.haliYikama.server.helper.Helper;
 import tr.com.dev.haliYikama.server.persist.dao.IUserDao;
 import tr.com.dev.haliYikama.server.persist.models.User;
-import tr.com.dev.haliYikama.server.service.interfaces.IUserService;
+import tr.com.dev.haliYikama.server.utils.EnumUtil;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -14,27 +20,31 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ramazancesur on 5/23/18.
  */
-public class UserServiceTest {
 
+@RunWith(MockitoJUnitRunner.class)
+public class UserServiceTest {
+    Helper helper = new Helper();
+    @Mock
     private IUserDao userDaoMock;
-    private IUserService userServiceMock;
-    private Helper helper;
+    @InjectMocks
+    private UserService userServiceMock;
+    private User user;
 
     @Before
-    public void setUp() throws Exception {
-        userDaoMock = Mockito.mock(IUserDao.class);
-        userServiceMock = new UserService(userDaoMock);
-        helper = new Helper();
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
+        user = helper.createDummyData(User.class);
+        user.setOid(1l);
+        user.setEntityState(EnumUtil.EntityState.ACTIVE);
+
+        when(userServiceMock.getAll()).thenReturn(Arrays.asList(user));
+        when(userServiceMock.findByKullaniciAdi(user.getKullaniciAdi())).thenReturn(user);
     }
 
     @Test
-    public void testFindByKullaniciAdi() throws Exception {
-        User user = helper.createDummyData(User.class);
-        user.setOid(1l);
-        String userName = user.getKullaniciAdi();
-        when(userServiceMock.get(1l)).thenReturn(user);
-        assertEquals(1l, userServiceMock.findByKullaniciAdi(userName).getOid().longValue());
-
-
+    public void testFindByKullaniciAdi() {
+        assertEquals(userServiceMock.getAll().get(0), user);
+        assertEquals(userServiceMock.findByKullaniciAdi(user.getKullaniciAdi()), user);
     }
 }

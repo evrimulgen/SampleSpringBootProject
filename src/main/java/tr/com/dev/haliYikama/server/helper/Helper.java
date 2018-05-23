@@ -5,6 +5,9 @@ import com.google.common.io.Resources;
 import com.namics.commons.random.RandomData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tr.com.dev.haliYikama.server.authentication.JwtUser;
+import tr.com.dev.haliYikama.server.authentication.JwtUserFactory;
+import tr.com.dev.haliYikama.server.persist.models.User;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +35,11 @@ public class Helper {
 
     public <T extends Object> T createDummyData(Class<T> clazz) {
         return RandomData.random(clazz);
+    }
+
+    public JwtUser createJwtUser(User user) {
+        JwtUser jwtUser = JwtUserFactory.create(user);
+        return jwtUser;
     }
 
     public Properties loadProperties(String filename) {
