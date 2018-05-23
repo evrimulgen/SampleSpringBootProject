@@ -1,9 +1,9 @@
-package tr.com.dev.haliYikama.server.configuration;
+package tr.com.dev.haliYikama.server.test.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -17,37 +17,39 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import tr.com.dev.haliYikama.server.helper.Helper;
 
+import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * Created by ramazancesur on 5/19/18.
+ * Created by ramazancesur on 5/23/18.
  */
 
 @Configuration
+
 @EnableJpaRepositories(basePackages = "tr.com.dev.haliYikama.server.persist",
-        entityManagerFactoryRef = "protEntityManager",
-        transactionManagerRef = "protTransactionManager")
-public class HibernateConfiguration {
+        entityManagerFactoryRef = "testEntityManager",
+        transactionManagerRef = "testTransactionManager")
+@Profile("testProfile")
+public class H2TestProfileJPAConfig {
+
     @Autowired
     private Environment environment;
 
-    @Bean("dataSource")
-    @Primary
-    public DriverManagerDataSource dataSource() {
+    @Bean("testDataSource")
+    public DataSource testDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(environment.getRequiredProperty("spring.mysql.jdbc.driverClassName"));
-        dataSource.setUrl(environment.getRequiredProperty("spring.mysql.jdbc.url"));
-        dataSource.setUsername(environment.getRequiredProperty("spring.mysql.jdbc.username"));
-        dataSource.setPassword(environment.getRequiredProperty("spring.mysql.jdbc.password"));
+        dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
+        dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
         return dataSource;
     }
 
 
     @Bean
-    @Primary
-    public LocalContainerEntityManagerFactoryBean protEntityManager() {
+    public LocalContainerEntityManagerFactoryBean testEntityManager() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setDataSource(dataSource());
+        factoryBean.setDataSource(testDataSource());
         factoryBean.setPackagesToScan("tr.com.dev.haliYikama.server.persist");
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
@@ -57,35 +59,31 @@ public class HibernateConfiguration {
     }
 
     private Properties getHibernateProperties() {
-        Helper helper= new Helper();
-        Properties properties= helper.getRestrictProp("application.properties","hibernate");
-        properties.put("hibernate.dialect", environment.getRequiredProperty("spring.mysql.hibern.dialect"));
+        Helper helper = new Helper();
+        Properties properties = helper.getRestrictProp("application.properties", "hibernate");
+        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         return properties;
     }
 
 
     @Bean
-    @Primary
-    public PlatformTransactionManager protTransactionManager() {
+    public PlatformTransactionManager testTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(protEntityManager().getObject());
-        DatabasePopulatorUtils.execute(databasePopulatorh2(),dataSource());
+        transactionManager.setEntityManagerFactory(testEntityManager().getObject());
+        DatabasePopulatorUtils.execute(databasePopulatorTestDB(), testDataSource());
         return transactionManager;
     }
 
 
-    private DatabasePopulator databasePopulatorh2() {
+    private DatabasePopulator databasePopulatorTestDB() {
         ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
         databasePopulator.setContinueOnError(false);
         return databasePopulator;
     }
 
     @Bean
-    @Primary
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
-
 
 }

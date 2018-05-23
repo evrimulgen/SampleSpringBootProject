@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import org.springframework.beans.factory.annotation.Value;
 import tr.com.dev.haliYikama.server.authentication.JwtAuthenticationRequest;
 import tr.com.dev.haliYikama.server.authentication.JwtUser;
 import tr.com.dev.haliYikama.server.authentication.service.JwtAuthenticationResponse;
@@ -18,20 +17,15 @@ import java.io.IOException;
  */
 public class RAuthentication {
     public static JwtAuthenticationResponse jwtAuthenticationResponse;
-    @Value("${server.app.url}")
-    private static String appUrl;
-    private Helper helper = new Helper();
 
     public static JwtAuthenticationResponse getAuthTokenCookie(JwtUser user) throws IOException {
         if (jwtAuthenticationResponse == null) {
+            Helper helper = new Helper();
+            String appUrl = helper.loadProperties("application.properties").getProperty("server.app.url");
             String uri = appUrl + "/auth";
             try {
-
-
                 Client client = Client.create();
-
                 WebResource webResource = client.resource(uri);
-
                 ObjectMapper mapper = new ObjectMapper();
                 JwtAuthenticationRequest jwtAuthenticationRequest = new JwtAuthenticationRequest(user.getUsername(), user.getPassword());
 

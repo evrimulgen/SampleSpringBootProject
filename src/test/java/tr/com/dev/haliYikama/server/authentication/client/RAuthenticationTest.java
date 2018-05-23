@@ -6,49 +6,75 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import tr.com.dev.haliYikama.server.Application;
 import tr.com.dev.haliYikama.server.authentication.JwtUser;
 import tr.com.dev.haliYikama.server.authentication.service.JwtAuthenticationResponse;
 import tr.com.dev.haliYikama.server.helper.Helper;
-import tr.com.dev.haliYikama.server.persist.dao.IUserDao;
+import tr.com.dev.haliYikama.server.persist.models.Adres;
+import tr.com.dev.haliYikama.server.persist.models.Telefon;
 import tr.com.dev.haliYikama.server.persist.models.User;
+import tr.com.dev.haliYikama.server.service.interfaces.IAdresService;
+import tr.com.dev.haliYikama.server.service.interfaces.ITelefonService;
 import tr.com.dev.haliYikama.server.service.interfaces.IUserService;
 import tr.com.dev.haliYikama.server.utils.EnumUtil;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by ramazancesur on 5/23/18.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@ContextConfiguration(classes = Application.class)
+@SpringBootTest()
+@ActiveProfiles("testProfile")
 public class RAuthenticationTest {
-    @MockBean
+ /*   @MockBean
     private IUserDao userDaoMock;
     @Autowired
+    private IUserService userServiceMock;*/
+
+    @Autowired
     private IUserService userServiceMock;
+
+    @Autowired
+    private IAdresService adresService;
+
+    @Autowired
+    private ITelefonService telefonService;
+
+    private User user;
+
     private Helper helper;
     @Before
     public void setUp() {
-      /*  userDaoMock = Mockito.mock(IUserDao.class);
-        userServiceMock= new UserService(userDaoMock);*/
         helper = new Helper();
+        user = helper.createDummyData(User.class);
+
+        Adres adres = helper.createDummyData(Adres.class);
+        adres.setEntityState(EnumUtil.EntityState.ACTIVE);
+        adres.setOid(null);
+        adresService.add(adres);
+
+        Telefon telefon = helper.createDummyData(Telefon.class);
+        telefon.setOid(null);
+        telefon.setEntityState(EnumUtil.EntityState.ACTIVE);
+        telefonService.add(telefon);
+
+        user.setOid(1l);
+        user.setEntityState(EnumUtil.EntityState.ACTIVE);
+        user.setEsasAdres(adres);
+        user.setEsasTel(telefon);
+
+        userServiceMock.add(user);
+
         System.out.println("Test Module is starting... ");
     }
 
     @Test
     public void testGetAuthTokenCookie() {
-        User user = helper.createDummyData(User.class);
         String userName = user.getKullaniciAdi();
         try {
-            user.setOid(1l);
-            user.setEntityState(EnumUtil.EntityState.ACTIVE);
-            when(userServiceMock.get(1l)).thenReturn(user);
+            //  when(userServiceMock.get(1l)).thenReturn(user);
             JwtUser jwtUser = helper.createJwtUser(user);
             JwtAuthenticationResponse response = RAuthentication.getAuthTokenCookie(jwtUser);
             System.out.println(response.getToken());
