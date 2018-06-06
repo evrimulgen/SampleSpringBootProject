@@ -76,15 +76,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // don't create session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-
                 .authorizeRequests()
-                // .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                // allow anonymous resource requests
-                .antMatchers(HttpMethod.GET, "/**/*.css", "/**/.js", "/**/*.png", "/*.html", "/favicon.ico", "/**/*.html",
-                        "/**/*.css", "/**/*.js").permitAll()
-                .antMatchers("/index.html", "/").permitAll()
+                .antMatchers(HttpMethod.GET, "/**/*.css", "/**/.js", "/**/*.png", "/*.html",
+                            "/index.html", "/","/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js")
+                            .permitAll()
+                .antMatchers( HttpMethod.POST,"/auth").permitAll()
                 .anyRequest().authenticated();
+
+
+
 
         // Custom JWT based security filter
         JwtAuthenticationTokenFilter authenticationTokenFilter = new JwtAuthenticationTokenFilter(userDetailsService(), jwtTokenUtil, tokenHeader);
@@ -96,7 +96,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers()
                 .frameOptions().sameOrigin()
                 .cacheControl();
-
     }
 
 
@@ -107,7 +106,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers(
                         HttpMethod.POST,
-                        authenticationPath
+                        "/auth"
                 )
 
                 // allow anonymous resource requests

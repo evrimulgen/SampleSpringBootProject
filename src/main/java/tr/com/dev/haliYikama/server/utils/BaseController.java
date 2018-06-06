@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import tr.com.dev.haliYikama.server.utils.exeptions.DefaultExceptionAttributes;
 import tr.com.dev.haliYikama.server.utils.exeptions.IExceptionAttributes;
 import tr.com.dev.haliYikama.server.utils.interfaces.IBaseController;
@@ -94,6 +92,7 @@ public abstract class BaseController<T extends BaseEntity>
     }
 
     @Override
+    @GetMapping("/getData/{id}")
     public ResponseEntity<T> getDataById(@PathVariable("id") Long id) {
         T data = null;
         try {
@@ -105,6 +104,7 @@ public abstract class BaseController<T extends BaseEntity>
     }
 
     @Override
+    @PutMapping
     public ResponseEntity<Boolean> addData(T data) {
         boolean result = service.add(data);
         if (!result) {
@@ -114,6 +114,7 @@ public abstract class BaseController<T extends BaseEntity>
     }
 
     @Override
+    @PostMapping
     public ResponseEntity<Boolean> updateData(T data) {
         boolean result = service.update(data);
         if (!result) {
@@ -123,6 +124,7 @@ public abstract class BaseController<T extends BaseEntity>
     }
 
     @Override
+    @DeleteMapping
     public ResponseEntity<Boolean> deleteData(T data) {
         boolean result = service.remove(data);
         if (!result) {

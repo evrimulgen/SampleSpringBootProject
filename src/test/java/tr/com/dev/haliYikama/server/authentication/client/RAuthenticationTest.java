@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import tr.com.dev.haliYikama.server.Application;
 import tr.com.dev.haliYikama.server.authentication.JwtUser;
 import tr.com.dev.haliYikama.server.authentication.service.JwtAuthenticationResponse;
 import tr.com.dev.haliYikama.server.helper.Helper;
@@ -25,7 +27,8 @@ import static org.junit.Assert.assertEquals;
  * Created by ramazancesur on 5/23/18.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest()
+@SpringBootTest
+@ContextConfiguration(classes = Application.class)
 @ActiveProfiles("testProfile")
 public class RAuthenticationTest {
  /*   @MockBean
@@ -60,7 +63,7 @@ public class RAuthenticationTest {
         telefon.setEntityState(EnumUtil.EntityState.ACTIVE);
         telefonService.add(telefon);
 
-        user.setOid(1l);
+        user.setOid(null);
         user.setEntityState(EnumUtil.EntityState.ACTIVE);
         user.setEsasAdres(adres);
         user.setEsasTel(telefon);
