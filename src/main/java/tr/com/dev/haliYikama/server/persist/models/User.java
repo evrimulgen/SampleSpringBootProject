@@ -4,8 +4,6 @@ import tr.com.dev.haliYikama.server.utils.BaseEntity;
 import tr.com.dev.haliYikama.server.utils.EnumUtil;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by ramazancesur on 5/19/18.

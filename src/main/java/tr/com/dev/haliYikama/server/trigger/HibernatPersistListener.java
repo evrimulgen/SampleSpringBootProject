@@ -14,7 +14,7 @@ public class HibernatPersistListener {
 
     @PrePersist
     public void setCreatedAt(BaseEntity entity) {
-        Calendar cal= Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
         entity.setCreatedDate(cal.getTime());
         entity.setUpdatedDate(cal.getTime());
     }

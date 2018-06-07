@@ -12,6 +12,6 @@ import java.io.Serializable;
  */
 @NoRepositoryBean
 @Transactional
-public interface IGenericDao<T extends BaseEntity, K extends Serializable> extends JpaRepository<T,K> {
+public interface IGenericDao<T extends BaseEntity, K extends Serializable> extends JpaRepository<T, K> {
 
 }

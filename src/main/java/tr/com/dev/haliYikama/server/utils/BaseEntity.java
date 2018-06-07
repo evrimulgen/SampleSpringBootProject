@@ -24,8 +24,8 @@ public class BaseEntity implements Serializable {
 
     @Id
     @Column(name = "OID", unique = true, nullable = false)
-    @GenericGenerator(name="keygen" , strategy="increment")
-    @GeneratedValue(generator="keygen")
+    @GenericGenerator(name = "keygen", strategy = "increment")
+    @GeneratedValue(generator = "keygen")
     private Long oid;
 
     @Version

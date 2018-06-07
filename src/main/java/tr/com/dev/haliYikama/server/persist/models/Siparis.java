@@ -1,6 +1,5 @@
 package tr.com.dev.haliYikama.server.persist.models;
 
-import com.google.j2objc.annotations.J2ObjCIncompatible;
 import tr.com.dev.haliYikama.server.utils.BaseEntity;
 
 import javax.persistence.*;

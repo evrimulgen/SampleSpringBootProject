@@ -8,9 +8,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- *
- *   ******** BURDAKİ SATIS TABLOSU BİZİM SATTIĞIMIZ
- *  *******  PROGRAM SATIŞLARIDIR...    ***********
+ * ******** BURDAKİ SATIS TABLOSU BİZİM SATTIĞIMIZ
+ * *******  PROGRAM SATIŞLARIDIR...    ***********
  * Created by ramazancesur on 5/19/18.
  */
 

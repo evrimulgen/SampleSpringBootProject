@@ -4,7 +4,6 @@ import tr.com.dev.haliYikama.server.utils.BaseEntity;
 import tr.com.dev.haliYikama.server.utils.EnumUtil;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "MUSTERI_SIPARIS")
-public class MusteriSiparis extends BaseEntity{
+public class MusteriSiparis extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "MUSTERI")
     private Musteri musteri;
