@@ -77,11 +77,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // don't create session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
+                .anyRequest().authenticated()
                 .antMatchers(HttpMethod.GET, "/**/*.css", "/**/.js", "/**/*.png", "/*.html",
                             "/index.html", "/","/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js")
                             .permitAll()
-                .antMatchers( HttpMethod.POST,"/auth").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers(HttpMethod.POST, "/auth").permitAll();
 
 
 
@@ -100,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         // AuthenticationTokenFilter will ignore the below paths
         web
                 .ignoring()

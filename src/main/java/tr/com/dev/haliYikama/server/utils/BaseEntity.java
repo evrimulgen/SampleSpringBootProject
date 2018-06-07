@@ -1,6 +1,8 @@
 package tr.com.dev.haliYikama.server.utils;
 
 import org.hibernate.annotations.GenericGenerator;
+import tr.com.dev.haliYikama.server.trigger.HibernatPersistListener;
+import tr.com.dev.haliYikama.server.trigger.HibernateUpdateListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +12,10 @@ import java.util.Date;
  * Created by ramazancesur on 5/19/18.
  */
 @MappedSuperclass
+@EntityListeners({
+        HibernateUpdateListener.class,
+        HibernatPersistListener.class
+})
 public class BaseEntity implements Serializable {
     /**
      *

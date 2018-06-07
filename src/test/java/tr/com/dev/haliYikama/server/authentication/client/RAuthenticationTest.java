@@ -5,12 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import tr.com.dev.haliYikama.server.Application;
 import tr.com.dev.haliYikama.server.authentication.JwtUser;
+import tr.com.dev.haliYikama.server.authentication.controller.AuthenticationRestController;
 import tr.com.dev.haliYikama.server.authentication.service.JwtAuthenticationResponse;
 import tr.com.dev.haliYikama.server.helper.Helper;
 import tr.com.dev.haliYikama.server.persist.models.Adres;
@@ -29,12 +31,18 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = Application.class)
+@WebMvcTest(AuthenticationRestController.class)
 @ActiveProfiles("testProfile")
 public class RAuthenticationTest {
  /*   @MockBean
     private IUserDao userDaoMock;
     @Autowired
     private IUserService userServiceMock;*/
+
+
+    @Autowired
+    IAdresService adresServiceMock;
+
 
     @Autowired
     private IUserService userServiceMock;
@@ -48,6 +56,7 @@ public class RAuthenticationTest {
     private User user;
 
     private Helper helper;
+
     @Before
     public void setUp() {
         helper = new Helper();

@@ -5,6 +5,7 @@ import com.google.common.io.Resources;
 import com.namics.commons.random.RandomData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import tr.com.dev.haliYikama.server.authentication.JwtUser;
 import tr.com.dev.haliYikama.server.authentication.JwtUserFactory;
 import tr.com.dev.haliYikama.server.persist.models.User;
@@ -31,6 +32,12 @@ public class Helper {
                     props.put(x.getKey(), x.getValue());
                 });
         return props;
+    }
+
+    public String encriptData(String data) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String criptedData = passwordEncoder.encode(data);
+        return criptedData;
     }
 
     public <T extends Object> T createDummyData(Class<T> clazz) {

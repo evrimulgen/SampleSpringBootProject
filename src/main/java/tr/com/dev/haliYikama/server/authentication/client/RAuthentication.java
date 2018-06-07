@@ -10,15 +10,13 @@ import tr.com.dev.haliYikama.server.authentication.JwtUser;
 import tr.com.dev.haliYikama.server.authentication.service.JwtAuthenticationResponse;
 import tr.com.dev.haliYikama.server.helper.Helper;
 
-import java.io.IOException;
-
 /**
  * Created by ramazancesur on 5/22/18.
  */
 public class RAuthentication {
     public static JwtAuthenticationResponse jwtAuthenticationResponse;
 
-    public static JwtAuthenticationResponse getAuthTokenCookie(JwtUser user) throws IOException {
+    public static JwtAuthenticationResponse getAuthTokenCookie(JwtUser user) {
         if (jwtAuthenticationResponse == null) {
             Helper helper = new Helper();
             String appUrl = helper.loadProperties("application.properties").getProperty("server.app.url");
@@ -29,6 +27,8 @@ public class RAuthentication {
                 ObjectMapper mapper = new ObjectMapper();
                 JwtAuthenticationRequest jwtAuthenticationRequest = new JwtAuthenticationRequest(user.getUsername(), user.getPassword());
 
+                String json = mapper.writeValueAsString(jwtAuthenticationRequest);
+                System.out.println(json);
 
                 ClientResponse response = webResource.type("application/json")
                         .post(ClientResponse.class, mapper.writeValueAsString(jwtAuthenticationRequest));
