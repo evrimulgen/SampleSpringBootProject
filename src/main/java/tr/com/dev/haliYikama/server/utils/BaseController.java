@@ -20,12 +20,12 @@ import java.util.Map;
  * Created by ramazancesur on 5/19/18.
  */
 public abstract class BaseController<T extends BaseEntity>
-                                   implements IBaseController<T> {
+        implements IBaseController<T> {
 
     /**
      * The Logger for this class.
      */
-    protected Logger logger =  LoggerFactory.getLogger(this.getClass());
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private IGenericService<T, Long> service;

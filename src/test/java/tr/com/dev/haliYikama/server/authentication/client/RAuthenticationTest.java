@@ -48,6 +48,7 @@ public class RAuthenticationTest {
     private User user;
 
     private Helper helper;
+
     @Before
     public void setUp() {
         helper = new Helper();

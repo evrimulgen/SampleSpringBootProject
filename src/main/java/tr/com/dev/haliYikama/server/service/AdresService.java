@@ -9,7 +9,7 @@ import tr.com.dev.haliYikama.server.service.interfaces.IAdresService;
 import tr.com.dev.haliYikama.server.utils.GenericService;
 import tr.com.dev.haliYikama.server.utils.interfaces.IGenericDao;
 
-@Service
+@Service("adresService")
 public class AdresService extends GenericService<Adres, Long> implements IAdresService {
 
     private IAdresDao adresDao;

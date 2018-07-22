@@ -12,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TELEFON")
-public class Telefon extends BaseEntity{
+public class Telefon extends BaseEntity {
     @Column(name = "TEL_NO")
     private String tel;
     @Column(name = "TEL_TYPE")

@@ -14,20 +14,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 @ContextConfiguration(classes = Application.class)
 public class ApplicationTests {
-	private Logger logger= LoggerFactory.getLogger(ApplicationTests.class);
-	@Before
-	public void setUp() throws Exception {
-		System.out.println("test procedure is initializing... ");
-	}
+    private Logger logger = LoggerFactory.getLogger(ApplicationTests.class);
 
-	@Test
-	public void contextLoads() {
+    @Before
+    public void setUp() throws Exception {
+        System.out.println("test procedure is initializing... ");
+    }
 
-	}
+    @Test
+    public void contextLoads() {
 
-	@After
-	public void tearDown() throws Exception {
-		System.out.println("test procedure is finished... ");
+    }
 
-	}
+    @After
+    public void tearDown() throws Exception {
+        System.out.println("test procedure is finished... ");
+
+    }
 }

@@ -1,7 +1,5 @@
 package tr.com.dev.haliYikama.server.persist.models;
 
-import tr.com.dev.haliYikama.server.utils.EnumUtil;
-
 import javax.persistence.*;
 import java.util.List;
 

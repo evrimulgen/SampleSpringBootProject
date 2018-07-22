@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by ramazancesur on 5/19/18.
  */
-public interface IBaseController <T extends BaseEntity>{
+public interface IBaseController<T extends BaseEntity> {
     ResponseEntity<List<T>> getAll();
 
     ResponseEntity<T> getDataById(@PathVariable("id") Long id);

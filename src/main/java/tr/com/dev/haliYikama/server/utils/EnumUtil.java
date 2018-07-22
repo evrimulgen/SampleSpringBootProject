@@ -1,7 +1,5 @@
 package tr.com.dev.haliYikama.server.utils;
 
-import javax.persistence.MappedSuperclass;
-
 /**
  * Created by ramazancesur on 5/19/18.
  */
@@ -36,30 +34,30 @@ public class EnumUtil {
     }
 
     public enum YETKI_TYPE {
-        CALISAN,FIRMA_YETKILISI,SUPER_ADMIN
+        CALISAN, FIRMA_YETKILISI, SUPER_ADMIN
     }
 
-    public enum ADRES_TYPE{
-       EV,IS,GENEL
+    public enum ADRES_TYPE {
+        EV, IS, GENEL
     }
 
-    public enum ADRES_USER_TYPE{
+    public enum ADRES_USER_TYPE {
         FIRMA_PERSONELI, FIRMA, MUSTERI, GENEL
     }
 
-    public enum TEL_TYPE{
-        CEP,EV,IS,FAX
+    public enum TEL_TYPE {
+        CEP, EV, IS, FAX
     }
 
-    public enum ODEME_TYPE{
-        AYLIK,YILLIK
+    public enum ODEME_TYPE {
+        AYLIK, YILLIK
     }
 
-    public enum URUN_CINSI{
-        ADET,KILOGRAM,GRAM,METREKARE
+    public enum URUN_CINSI {
+        ADET, KILOGRAM, GRAM, METREKARE
     }
 
-    public enum SIPARIS_DURUMU{
+    public enum SIPARIS_DURUMU {
         TESLIM_EDILECEK, TESLIME_HAZIR, TESLIM_EDILDI
     }
 

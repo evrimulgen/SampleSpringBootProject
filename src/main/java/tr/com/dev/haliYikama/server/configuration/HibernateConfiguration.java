@@ -57,8 +57,8 @@ public class HibernateConfiguration {
     }
 
     private Properties getHibernateProperties() {
-        Helper helper= new Helper();
-        Properties properties= helper.getRestrictProp("application.properties","hibernate");
+        Helper helper = new Helper();
+        Properties properties = helper.getRestrictProp("application.properties", "hibernate");
         properties.put("hibernate.dialect", environment.getRequiredProperty("spring.mysql.hibern.dialect"));
         return properties;
     }
@@ -69,7 +69,7 @@ public class HibernateConfiguration {
     public PlatformTransactionManager protTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(protEntityManager().getObject());
-        DatabasePopulatorUtils.execute(databasePopulatorh2(),dataSource());
+        DatabasePopulatorUtils.execute(databasePopulatorh2(), dataSource());
         return transactionManager;
     }
 
@@ -85,7 +85,6 @@ public class HibernateConfiguration {
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
 
 
 }
