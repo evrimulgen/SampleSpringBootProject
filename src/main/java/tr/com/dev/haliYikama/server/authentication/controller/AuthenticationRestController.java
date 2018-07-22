@@ -2,7 +2,6 @@ package tr.com.dev.haliYikama.server.authentication.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +22,6 @@ import tr.com.dev.haliYikama.server.authentication.service.JwtAuthenticationResp
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@Profile("testProfile")
 public class AuthenticationRestController {
 
     @Value("Authorization")
