@@ -5,9 +5,10 @@ import tr.com.dev.haliYikama.server.persist.models.Siparis;
 import tr.com.dev.haliYikama.server.utils.interfaces.IGenericDao;
 
 /**
- * Created by ramazancesur on 5/19/18.
+ * Created by ramazancesur on 7/23/18.
  */
 @Repository("siparisDao")
 public interface ISiparisDao extends IGenericDao<Siparis, Long> {
+
 
 }
