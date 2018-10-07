@@ -5,7 +5,6 @@ import tr.com.dev.haliYikama.server.utils.EnumUtil;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,11 +38,10 @@ public class MusteriSiparis extends BaseEntity {
     private String musteriNotu;
 
     @Column(name = "TESLIM_TARIHI")
-    private Date teslimTarihi;
+    private long teslimTarihi;
 
     @Column(name = "SIPARIS_DURUMU")
     private EnumUtil.SIPARIS_DURUMU siparis_durumu;
-
 
     public Musteri getMusteri() {
         return musteri;
@@ -101,11 +99,11 @@ public class MusteriSiparis extends BaseEntity {
         this.musteriNotu = musteriNotu;
     }
 
-    public Date getTeslimTarihi() {
+    public long getTeslimTarihi() {
         return teslimTarihi;
     }
 
-    public void setTeslimTarihi(Date teslimTarihi) {
+    public void setTeslimTarihi(long teslimTarihi) {
         this.teslimTarihi = teslimTarihi;
     }
 

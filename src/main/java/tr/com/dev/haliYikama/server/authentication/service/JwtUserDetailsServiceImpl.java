@@ -9,6 +9,8 @@ import tr.com.dev.haliYikama.server.authentication.JwtUserFactory;
 import tr.com.dev.haliYikama.server.persist.dao.IUserDao;
 import tr.com.dev.haliYikama.server.persist.models.User;
 
+import java.util.List;
+
 /**
  * Created by stephan on 20.03.16.
  */
@@ -20,11 +22,11 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByKullaniciAdi(username);
-        if (user == null) {
+        List<User> lstUser = userRepository.findByKullaniciAdi(username);
+        if (lstUser.size() == 0) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
-            return JwtUserFactory.create(user);
+            return JwtUserFactory.create(lstUser.get(0));
         }
     }
 }

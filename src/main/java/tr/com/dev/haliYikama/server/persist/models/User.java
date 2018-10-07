@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "USERS")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User extends BaseEntity {
     @Column(name = "KULLANICI_ADI")
     private String kullaniciAdi;

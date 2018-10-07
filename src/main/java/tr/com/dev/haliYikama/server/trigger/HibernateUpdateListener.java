@@ -14,7 +14,7 @@ public class HibernateUpdateListener {
     @PreUpdate
     public <T extends BaseEntity> void setUpdatedAt(T entity) {
         Calendar cal = Calendar.getInstance();
-        entity.setUpdatedDate(cal.getTime());
+        entity.setUpdatedDate(cal.getTime().getTime());
     }
 
 }

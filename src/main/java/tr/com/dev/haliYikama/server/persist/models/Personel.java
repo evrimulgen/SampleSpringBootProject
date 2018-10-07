@@ -3,7 +3,6 @@ package tr.com.dev.haliYikama.server.persist.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * Created by ramazancesur on 5/19/18.
@@ -16,7 +15,7 @@ public class Personel extends User {
     @Column(name = "SOYADI")
     private String soyadi;
     @Column(name = "DOGUM_TARIHI")
-    private Date dogumTarihi;
+    private long dogumTarihi;
 
     public String getAdi() {
         return adi;
@@ -34,11 +33,11 @@ public class Personel extends User {
         this.soyadi = soyadi;
     }
 
-    public Date getDogumTarihi() {
+    public long getDogumTarihi() {
         return dogumTarihi;
     }
 
-    public void setDogumTarihi(Date dogumTarihi) {
+    public void setDogumTarihi(long dogumTarihi) {
         this.dogumTarihi = dogumTarihi;
     }
 }

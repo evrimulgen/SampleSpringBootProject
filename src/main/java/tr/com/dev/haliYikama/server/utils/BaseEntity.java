@@ -6,7 +6,6 @@ import tr.com.dev.haliYikama.server.trigger.HibernateUpdateListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by ramazancesur on 5/19/18.
@@ -33,18 +32,13 @@ public class BaseEntity implements Serializable {
     private int lastUpdated;
 
     @Column(name = "CREAYED_DATE")
-    private Date createdDate;
+    private Long createdDate;
 
     @Column(name = "UPDATED_DATE")
-    private Date updatedDate;
+    private Long updatedDate;
 
     @Column(name = "DURUM")
     private EnumUtil.EntityState entityState;
-
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public Long getOid() {
         return oid;
@@ -62,19 +56,19 @@ public class BaseEntity implements Serializable {
         this.lastUpdated = lastUpdated;
     }
 
-    public Date getCreatedDate() {
+    public Long getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getUpdatedDate() {
+    public Long getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(Date updatedDate) {
+    public void setUpdatedDate(Long updatedDate) {
         this.updatedDate = updatedDate;
     }
 

@@ -9,6 +9,8 @@ import tr.com.dev.haliYikama.server.service.interfaces.IUserService;
 import tr.com.dev.haliYikama.server.utils.GenericService;
 import tr.com.dev.haliYikama.server.utils.interfaces.IGenericDao;
 
+import java.util.List;
+
 /**
  * Created by ramazancesur on 5/23/18.
  */
@@ -25,6 +27,7 @@ public class UserService extends GenericService<User, Long> implements IUserServ
 
     @Override
     public User findByKullaniciAdi(String kullaniciAdi) {
-        return userDao.findByKullaniciAdi(kullaniciAdi);
+        List<User> lstUser = userDao.findByKullaniciAdi(kullaniciAdi);
+        return lstUser.size() == 0 ? null : lstUser.get(0);
     }
 }
